@@ -19,11 +19,18 @@ snakeGame.controller = {
     }, 1000);
   },
   run: function() {
-    addRemoveSnakeCells = this.snake.move();
-    this.board.moveSnake(addRemoveSnakeCells);
+    var grow = this.eatFood(); // Boolean grow, T if ate food
+    this.moveSnake(grow);
     this.view.render(this.board);
   },
   arrowPressHandler: function(e) {
     this.snake.changeDirection(snakeGame.keyCodeDirMappings[ e.keyCode ]);
+  },
+  moveSnake: function (grow) {
+    var addRemoveSnakeCells = this.snake.move(grow);
+    this.board.moveSnake(addRemoveSnakeCells);
+  },
+  eatFood: function () {
+    return this.board.checkIfAteFood( this.snake.snakeBody[0] );
   }
 }

@@ -23,3 +23,7 @@ snake-game .cell {
 snake-game .cell.snake {
   background-color: green;
 }
+
+snake-game .cell.food {
+  background-color: magenta;
+}
