@@ -2,6 +2,7 @@ snakeGame.view = {
   init: function( keyPressHandler, playButtonHandler ) {
     this.gameWrapper = document.getElementsByTagName('snake-game')[0];
     this.playBtn = document.getElementsByTagName('input')[0];
+    this.score = document.getElementById('score');
     this.addEventListeners(keyPressHandler, playButtonHandler);
   },
   render: function(board, snakeBody) {
@@ -25,5 +26,8 @@ snakeGame.view = {
   addEventListeners: function(keyPressHandler, playButtonHandler) {
     document.addEventListener('keydown', keyPressHandler );
     this.playBtn.addEventListener('click', playButtonHandler );
+  },
+  updateScore: function(score) {
+    this.score.innerText = "Score: " + score;
   }
 }
