@@ -16,14 +16,16 @@ snakeGame.controller = {
 
     this.runInterval = setInterval(function () {
         _this.run();
-    }, 1000);
+    }, 750);
   },
   run: function() {
     var grow = this.eatFood(); // Boolean grow, T if ate food
     if (!this.moveSnake(grow)) {
-      console.log("Uh-Oh You ran in to the Edge! Game Over.");
+      alert("Uh-Oh You had a collision! Game Over.");
       window.clearInterval(this.runInterval);
+
     };
+
     this.view.render(this.board);
   },
   arrowPressHandler: function(e) {

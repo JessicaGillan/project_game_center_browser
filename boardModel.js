@@ -43,12 +43,17 @@ snakeGame.boardModel = {
     return grid;
   },
   moveSnake: function(addRemoveCells) {
-    var inBounds1, inBounds2;
+    console.log(addRemoveCells)
+    var valid = false;
 
-    if (addRemoveCells.add) inBounds1 = this.updateCell(addRemoveCells.add);
-    if (addRemoveCells.remove) inBounds2 = this.updateCell(addRemoveCells.remove);
+    if (addRemoveCells.add) valid = this.updateCell(addRemoveCells.add);
+    console.log(valid)
+    if (addRemoveCells.remove && valid) {
+      addRemoveCells.remove.value = null;
+      this.updateCell(addRemoveCells.remove);
+    }
 
-    return inBounds1 && inBounds2;
+    return valid;
   },
   checkIfAteFood: function (snakeHead) {
     if (snakeHead.x === this.food.x && snakeHead.y === this.food.y) {
@@ -60,12 +65,18 @@ snakeGame.boardModel = {
   updateCell: function(coord){
     var cell = coord.x + "_" + coord.y;
 
-    if (this.grid[cell]) {
+    if (this.grid[cell] && this.notCollision(this.grid[cell].value, coord.value)) {
       this.grid[cell] = coord;
       return true;
     } else {
       return false;
     }
+  },
+  inBounds: function (cell) {
+    return cell;
+  },
+  notCollision: function (val1, val2) {
+    return !(val1 === "snake" && val2 === "snake")
   },
   getRandomCell: function () {
     var keys = Object.keys(this.grid),

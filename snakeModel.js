@@ -25,7 +25,6 @@ snakeGame.snakeModel = {
     var tail;
     if (!grow) {
       tail = this.moveTail();
-      tail.value = null
     }
 
     // this.headVector = new head location to add snake cell on grid for
