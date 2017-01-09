@@ -14,22 +14,28 @@ snakeGame.snakeModel = {
     d: {x: 1, y: 0}
   },
   move: function(grow) {
-    this.headVector[x] += this.headVector.d.x
-    this.headVector[y] += this.headVector.d.y
+    grow = !!grow;
+
+    this.headVector.x += this.headVector.d.x
+    this.headVector.y += this.headVector.d.y
 
     this.moveHead();
 
-    // if not "growing"
+    // if not "growing" then remove the last cell in body
     var tail;
     if (!grow) {
       tail = this.moveTail();
+      tail.value = null
     }
 
-    return [this.headVector, tail]
+    // this.headVector = new head location to add snake cell on grid for
+    // tail = the snakeGame.Coord to remove snake cell on grid for (unless grew, then == undefined)
+    return {add: this.snakeBody[0], remove: tail}
   },
   changeDirection: function(newDirection) {
-    this.headVector.d.x = newDirection.x || this.headVector.d.x
-    this.headVector.d.y = newDirection.y || this.headVector.d.y
+    newDirection = newDirection || this.headVector.d;
+    this.headVector.d.x = newDirection.x;
+    this.headVector.d.y = newDirection.y;
   },
   snakeBody: []
 }

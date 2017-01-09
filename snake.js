@@ -111,6 +111,13 @@ snakeGame.Coord = function(x,y, value) {
   this.value = value || null;
 }
 
+snakeGame.keyCodeDirMappings = {
+  37: {x: -1, y: 0},
+  38: {x: 0, y: -1},
+  39: {x: 1, y: 0},
+  40: {x: 0, y: 1}
+}
+
 Ready.run( function() {
   snakeGame.controller.init(15);
 });

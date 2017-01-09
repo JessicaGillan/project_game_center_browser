@@ -4,19 +4,21 @@ snakeGame.boardModel = {
     this.grid = this.setupBoard(this.size, snake);
   },
   setupBoard: function(size, snake) {
-    console.log("setup");
     var board = this.newBoard(size);
-    return this.addSnake(board, snake);
+    board = this.addSnake(board, snake)
+    return this.addFood(board, snake);
   },
   addSnake: function(board, snake){
     var c;
     for(i = 0; i < snake.length; i ++){
       c = snake[i].x + "_" + snake[i].y;
-      console.log(c)
       board[c] = snake[i];
     }
     return board;
   },
+  addFood: function() {
+    
+  };
   newBoard: function(size) {
     grid = {};
 
@@ -27,5 +29,17 @@ snakeGame.boardModel = {
     }
 
     return grid;
+  },
+  moveSnake: function(addRemoveCells) {
+    this.updateCell(addRemoveCells.add);
+    this.updateCell(addRemoveCells.remove);
+
+    return this.grid;
+  },
+  updateCell: function(coord){
+    var cell = coord.x + "_" + coord.y;
+    this.grid[cell] = coord;
+
+    return this.grid[cell];
   }
 }
