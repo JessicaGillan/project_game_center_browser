@@ -3,7 +3,7 @@
 }
 snake-game {
   width: 75vw;
-  margin: auto;
+  margin: 20px 0;
   display: block;
   position: relative;
 }
@@ -26,4 +26,8 @@ snake-game .cell.snake {
 
 snake-game .cell.food {
   background-color: magenta;
+}
+
+input.btn {
+  margin: 15px 0;
 }

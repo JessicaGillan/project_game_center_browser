@@ -1,5 +1,9 @@
 snakeGame.snakeModel = {
   init: function() {
+    this.snakeBody = []
+    this.headVector.x = 0;
+    this.headVector.y = 0;
+    this.headVector.d = {x: 1, y: 0};
     this.moveHead(); // Add head to body
   },
   moveHead: function() {
