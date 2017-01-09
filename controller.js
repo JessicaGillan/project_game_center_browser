@@ -14,13 +14,16 @@ snakeGame.controller = {
     });
     this.view.render(this.board);
 
-    setInterval(function () {
+    this.runInterval = setInterval(function () {
         _this.run();
     }, 1000);
   },
   run: function() {
     var grow = this.eatFood(); // Boolean grow, T if ate food
-    this.moveSnake(grow);
+    if (!this.moveSnake(grow)) {
+      console.log("Uh-Oh You ran in to the Edge! Game Over.");
+      window.clearInterval(this.runInterval);
+    };
     this.view.render(this.board);
   },
   arrowPressHandler: function(e) {
@@ -28,7 +31,7 @@ snakeGame.controller = {
   },
   moveSnake: function (grow) {
     var addRemoveSnakeCells = this.snake.move(grow);
-    this.board.moveSnake(addRemoveSnakeCells);
+    return this.board.moveSnake(addRemoveSnakeCells);
   },
   eatFood: function () {
     return this.board.checkIfAteFood( this.snake.snakeBody[0] );
